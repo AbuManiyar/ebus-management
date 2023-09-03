@@ -4,7 +4,7 @@ logging.basicConfig(filename='ebus.log', level=logging.DEBUG)
 from user import User  
 from admin import Admin 
 from driver import Driver
-
+from cities import records
 
 application =  Flask(__name__)
 
@@ -42,6 +42,44 @@ def createdriver(adminid):
         return render_template('admin.html', adminid=adminid, msg='Driver Added')
     else:
         return 'Some error occured'
+
+
+@application.route('/driverlogin')
+def driverlogin():
+    return render_template('driverlogin.html')
+
+@application.route('/driver', methods = ['POST'])
+def driver():
+    id = request.form['DID']
+    password = request.form['Password']
+    d = Driver(id,password)
+    result = d.login()
+    if result ==1:
+        citynames = records()
+        return render_template('driver.html', driverid = id, citynames = citynames)
+    elif result==0:
+        return render_template('driverlogin.html', msg = 'Wrong Driver Id')
+    else: 
+        return render_template('driverlogin.html', msg = 'Invalid Credentials')
+
+@application.route('/postbusinfo/<driverid>', methods=['POST'])
+def postdetails(driverid):
+    source = request.form['source']
+    destination = request.form['destination']
+    bustype = request.form['bus-type']
+    contact = request.form['contact']
+    info = (source, destination)
+    postdetail = Driver.postbusinfo(driverid, bustype, contact, *info )
+    if postdetail == 1:
+        return render_template('driver.html', msg = 'Posted Bus Details')
+    else:
+        return render_template('driver.html', msg = 'Some issue occured')
+
+
+@application.route('/userlogin')
+def userlogin():
+    return render_template('userlogin.html')
+
 
 
 if __name__ == '__main__':

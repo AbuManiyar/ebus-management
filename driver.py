@@ -26,8 +26,8 @@ class Driver:
         drivers =  db['driver']
         detail = drivers.find_one({'driver id': self.id})
         try: 
-            print(len(detail))
-            print('try block in login')
+            len(detail)
+            logging.info('Matched DID for driver')
         except:
             logging.info('no matching id for driver')
             return 0
@@ -38,10 +38,10 @@ class Driver:
             logging.info('invalid password for driver')
             return 2
         
-    def postbusinfo(self, type, contact, *info):
+    def postbusinfo(driverid, type, contact, *info):
        try:
         bus = db['bus']
-        details = {'driver id': self.id, 'info': info, 'type' : type, 'contact': contact }
+        details = {'driver id': driverid, 'info': info, 'type' : type, 'contact': contact }
         bus.insert_one(details)
         logging.info('Bus info added')
         return 1

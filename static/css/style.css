@@ -54,3 +54,11 @@ body {
     width: 200px;
     background-color: aliceblue;
   }
+
+  .container select {
+    color: rgb(140, 104, 104);
+    background-color: whitesmoke;
+    width: 25%;
+    min-height: 30px;
+    height: 7vh;
+  }
