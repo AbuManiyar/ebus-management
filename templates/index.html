@@ -10,16 +10,20 @@
 {% block body %}
 <br></br>
 <h1>E-Bus Location System</h1><center>{{msg}}</center>
-<form action='/view' , method='post' >
-    <div class="form-outline mb-4"><center>
-      <label class="form-label" for="form2Example1">Login</label>
-      <input name="username" class="form-control" placeholder="Enter User ID" requiredtype="text" id="form2Example1"/></center>
-  </div>
+<br/>
+<div>
+<a type="button" href ="adminlogin"class="btn btn-outline-warning">Admin</a>
+</div>
+<br/>
+<div>
+<a type="button" href="userlogin" class="btn btn-outline-dark">User Login</a>
+</div>
+<br/>
+<div>
+<a type="button" href="driverlogin"class="btn btn-outline-info">Driver</a>
+</div>
+<br/>
+</form>
+  <a href='/register'>Register as User</a>
   
-   
-    <!-- Submit button -->
-    <button type="Submit" class="btn btn-primary  mb-4">View Recipes</button>
-  </form>
-
-  <a href='/new'>Create a new account</a>
 {% endblock body %}

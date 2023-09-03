@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+
+#test file
+ztest.py
+
 # Distribution / packaging
 .Python
 build/

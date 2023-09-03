@@ -31,16 +31,13 @@ body {
     font-style: italic;
   }
   
-  button.btn{
-    background: blueviolet;
-  }
+
   button.btn:hover{
-    background: palevioletred
+    background: blueviolet
   }
   
   .container a:hover {
-    color: white;
-    background: blueviolet;
+    background: lightblue;
   }
   
   center p{
@@ -51,4 +48,9 @@ body {
   
   .container h3.title{
   color: violet;
+  }
+
+  .container div a {
+    width: 200px;
+    background-color: aliceblue;
   }
