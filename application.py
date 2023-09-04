@@ -1,6 +1,6 @@
 from flask import Flask,render_template,request
 import logging
-logging.basicConfig(filename='ebus.log', level=logging.DEBUG)
+logging.basicConfig(filename='ebus.log', level=logging.DEBUG, format='%(asctime)s -%(levelname)s-%(message)s')
 from user import User  
 from admin import Admin 
 from driver import Driver
@@ -12,13 +12,19 @@ application =  Flask(__name__)
 def index():
     return render_template('index.html')
 
+
+# admin route
+
+
 @application.route('/adminlogin')
 def adminlogin():
+   logging.info('admin login page loaded to enter id and paasword') 
    return render_template('adminlogin.html') 
    
 
 @application.route('/admin', methods = ['POST'])
 def admin():
+  try:
     id = request.form['ID']
     password = request.form['Password']
     a = Admin(id,password)
@@ -30,9 +36,13 @@ def admin():
         return render_template('adminlogin.html', msg = 'Wrong Admin Id')
     else: 
         return render_template('adminlogin.html', msg = 'Invalid Credentials')
-
+  except:
+      logging.warning('Admin Login Failed')
+      
+      
 @application.route('/createdriver/<adminid>', methods=["POST"])
 def createdriver(adminid):
+  try:  
     driver = request.form['DID']
     password = request.form['Password']
     add = Admin.createdriver(adminid,driver,password)
@@ -42,7 +52,10 @@ def createdriver(adminid):
         return render_template('admin.html', adminid=adminid, msg='Driver Added')
     else:
         return 'Some error occured'
+  except:
+      logging.warning(f'Driver creation failed by admin id={adminid}')
 
+# ----------------------------------driver route ------------------------------------------------
 
 @application.route('/driverlogin')
 def driverlogin():
@@ -71,9 +84,13 @@ def postdetails(driverid):
     info = (source, destination)
     postdetail = Driver.postbusinfo(driverid, bustype, contact, *info )
     if postdetail == 1:
-        return render_template('driver.html', msg = 'Posted Bus Details')
+        return render_template('driver.html',driverid = driverid, msg = 'Bus Details Posted', citynames = records())
     else:
-        return render_template('driver.html', msg = 'Some issue occured')
+        return render_template('driver.html',driverid = driverid, msg = 'Some issue occured')
+
+
+
+# ----------------------------------- user route ----------------------------------------------------
 
 
 @application.route('/userlogin')
@@ -81,6 +98,30 @@ def userlogin():
     return render_template('userlogin.html')
 
 
-
+@application.route('/user', methods=["POST"])
+def user():
+    id = request.form['ID']
+    password = request.form['Password']
+    u = User(id, password)
+    result = u.login()
+    if result == 0:
+        return render_template('userlogin.html', msg = 'Invalid Id')
+    elif result == 1:
+        return render_template('user.html', citynames = records() )
+    elif result ==2 :
+        return render_template('userlogin.html', msg='Invalid credentials')
+    
+    
+@application.route('/busdetails', methods=['POST'])
+def busdetails():
+    src = request.form['source']
+    dest = request.form['destination']
+    u = User(None,None)
+    result = u.searchbus(src, dest) 
+    if result==0:
+        return render_template('busdetails.html', msg = 'No Buses between', source = src , destination = dest, condition = False)
+    else:
+        return render_template('busdetails.html', details = result, condition=True)
+    
 if __name__ == '__main__':
     application.run(debug=True)
