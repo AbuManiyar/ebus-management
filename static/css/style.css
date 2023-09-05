@@ -21,9 +21,10 @@ body {
   }
   
   body .container{
-    background: lightgray;
+    background: linear-gradient(45deg, #efe6bb, transparent) #e6fffdc4;
     margin: 30px;
     height : 550px
+    
   }
   
   label{
@@ -37,7 +38,8 @@ body {
   }
   
   .container a:hover {
-    background: lightblue;
+    background: rgba(231, 225, 237, 0.973);
+    color: rgb(0, 0, 0);
   }
   
   center p{
@@ -52,7 +54,6 @@ body {
 
   .container div a {
     width: 200px;
-    background-color: aliceblue;
   }
 
   .container select {
@@ -62,3 +63,4 @@ body {
     min-height: 30px;
     height: 7vh;
   }
+

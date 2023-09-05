@@ -11,7 +11,6 @@ class User:
         logging.info('User is Registring')
         users = db['users']
         record = users.count_documents({'email': email})
-        print(record)
         if record==0:
             users.insert_one({'firstname': firstname, 'lastname':lastname, 'email': email , 'password': password})
             logging.info('User Registered Successfully')
@@ -38,8 +37,8 @@ class User:
 
     def searchbus(self, source,destination):
         bus= db['bus']
-        results = bus.find({'info':[source,destination]})
-        size = bus.count_documents({'info':[source, destination]})
+        results = bus.find({ "info.0": source , "info.1": destination })
+        size = bus.count_documents({ "info.0": source , "info.1": destination })
         if size > 0 :
             return results
         else:

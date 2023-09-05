@@ -9,7 +9,7 @@
 
 <br></br>
 <h1>Search Results</span></h1>
-<form action='/back' >
+<form  >
     <div class="form-outline mb-4"><center>
 
         <br/>
@@ -20,7 +20,9 @@
                 <th scope="col">Sl.no</th>
                 <th scope="col">From</th>
                 <th scope="col">To</th>
-                <th scope="col">Bus Type</th>
+                <th scope="col">Day</th>
+                <th scope="col">Time</th>
+                <th scope="col">Type</th>
                 <th scope="col">Contact</th>
               </tr>
             </thead>
@@ -30,6 +32,8 @@
                 <th scope="row">{{loop.index}}</th>
                 <td>{{i['info'][0]}}</td>
                 <td>{{i['info'][1]}}</td>
+                <td>{{i['info'][2]}}</td>
+                <td>{{i['info'][3]}}</td>
                 <td>{{i['type']}}</td>
                 <td>{{i['contact']}}</td>
               </tr>
@@ -41,11 +45,10 @@
           <text>{{source}} and {{destination}}</text>
           {% endif %}
 </center></div>
-  
-    <!-- Submit button -->
-    <button type="Submit" style="padding: 1vh 5vw" class="btn btn-secondary  mb-4">Go Back</button>
   </form>
-<a href='/'>Logout</a>
-
+  <button onclick="history.back()" style="padding: 1vh 5vw" class="btn btn-secondary  mb-4">Go Back</button>
+<div>
+<a  href='/'>Logout</a>
+</div>
 
 {% endblock body %}

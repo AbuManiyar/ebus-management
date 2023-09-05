@@ -30,6 +30,25 @@
             {% endfor %}
             </select></div>
             
+            <label class='form lable'for="bus-day">Day :</label> 
+        <div>
+            <select name="day" id="bus-day"> 
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+            <option value="Every Day" selected>Every Day</option>
+            </select></div>
+
+
+            <label class='form lable'for="bus-time">Timing :</label> 
+            <div>
+                <input style='width: 25%;' type="time" id="bus-time" name="time" required/>
+                </div>
+
 
         <label class='form lable'for="bus-names">Bus Type :</label>   
         <div>
@@ -40,7 +59,7 @@
     
         <div>
             <label class="form-label" for="form2Example3">Contact</label>
-            <input name="contact" style='width: 25%;' class="form-control" placeholder="Contact :"  pattern=".{10,10}" type="number" id="form2Example3" required/>
+            <input name="contact" style='width: 25%;' class="form-control" placeholder="Contact :"  pattern="[0-9]{10,10}" type="tel" id="form2Example3" required/>
         </div>
 
 </center></div>

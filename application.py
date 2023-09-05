@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,redirect
 import logging
 logging.basicConfig(filename='ebus.log', level=logging.DEBUG, format='%(asctime)s -%(levelname)s-%(message)s')
 from user import User  
@@ -79,9 +79,11 @@ def driver():
 def postdetails(driverid):
     source = request.form['source']
     destination = request.form['destination']
+    day = request.form['day']
+    time = request.form['time']
     bustype = request.form['bus-type']
     contact = request.form['contact']
-    info = (source, destination)
+    info = (source, destination, day,time)
     postdetail = Driver.postbusinfo(driverid, bustype, contact, *info )
     if postdetail == 1:
         return render_template('driver.html',driverid = driverid, msg = 'Bus Details Posted', citynames = records())
@@ -123,5 +125,23 @@ def busdetails():
     else:
         return render_template('busdetails.html', details = result, condition=True)
     
+@application.route('/registration')
+def registration():
+    return render_template('register.html')
+    
+@application.route('/register', methods=["POST"])
+def register():
+    fname = request.form['firstname']
+    lname = request.form['lastname']
+    email = request.form['email']
+    password = request.form['Password']
+    u = User(None, None)
+    result = u.register(fname,lname,email,password)
+    if result == 1:
+        return render_template('userlogin.html', msg2 = "Now You Can Login")
+    else:
+        return render_template('register.html', msg = 'mail provided already exist try to login')
+      
+        
 if __name__ == '__main__':
     application.run(debug=True)
