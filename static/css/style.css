@@ -17,25 +17,27 @@ body {
   }
   
   h1{
-    color: blueviolet;
+    color: white;
+    text-shadow: 2px 2px #1c87c9;;
   }
   
   body .container{
-    background: linear-gradient(0deg, #deff84, transparent) #e6fffdc4;
     background-image: url('../ebusbg.jpg');
     margin: 30px;
-    height : 550px
-    
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   label{
-    color: darkblue;
+    color: white;
     font-style: italic;
   }
   
 
   button.btn:hover{
-    background: blueviolet
+    background: rgb(255, 188, 20);
+    color: white;
   }
   
   .container a:hover {
@@ -65,3 +67,8 @@ body {
     height: 7vh;
   }
 
+table.table{
+  color: orange;
+  text-shadow: 0.5px 0.1px #f1f1f1;
+  background-color: gray;
+}
