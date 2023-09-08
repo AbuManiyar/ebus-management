@@ -21,7 +21,8 @@ body {
   }
   
   body .container{
-    background: linear-gradient(45deg, #efe6bb, transparent) #e6fffdc4;
+    background: linear-gradient(0deg, #deff84, transparent) #e6fffdc4;
+    background-image: url('ebusbg.jpg');
     margin: 30px;
     height : 550px
     
